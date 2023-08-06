@@ -18,6 +18,25 @@ export const App = () => {
   const [largeImageURL, setLargeImageURL] = useState('');
 
   useEffect(() => {
+    const getImagesToArray = async () => {
+      try {
+        setIsLoading(true);
+        const { totalHits, hits } = await getImages(value, page);
+        const pageCount = totalHits / 12;
+        setTotalPages(pageCount);
+        setTimeout(() => {
+          if (page !== 1) {
+            setImages(prevImages => [...prevImages, ...hits]);
+          } else {
+            setImages(hits);
+          }
+          setIsLoading(false);
+        }, 1000);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     if (page !== 1 || value !== '') {
       getImagesToArray();
     }
@@ -49,25 +68,6 @@ export const App = () => {
 
   const buttonOnClick = () => {
     setPage(prevPage => prevPage + 1);
-  };
-
-  const getImagesToArray = async () => {
-    try {
-      setIsLoading(true);
-      const { totalHits, hits } = await getImages(value, page);
-      const pageCount = totalHits / 12;
-      setTotalPages(pageCount);
-      setTimeout(() => {
-        if (page !== 1) {
-          setImages(prevImages => [...prevImages, ...hits]);
-        } else {
-          setImages(hits);
-        }
-        setIsLoading(false);
-      }, 1000);
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (
