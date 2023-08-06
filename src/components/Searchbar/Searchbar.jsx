@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
-
-import { Component } from 'react';
+import { useState } from 'react';
 import {
   Header,
   SearchForm,
@@ -9,41 +8,36 @@ import {
   StyledBiSearchAlt,
 } from './Searchbar.styled';
 
-export class Searchbar extends Component {
-  state = {
-    value: '',
+export const Searchbar = ({ onSubmit }) => {
+  const [value, setValue] = useState('');
+
+  const onChange = event => {
+    setValue(event.currentTarget.value.trim().toLowerCase());
   };
 
-  onChange = event => {
-    this.setState({ value: event.currentTarget.value.trim().toLowerCase() });
-  };
-
-  onSubmit = event => {
-    event.preventDefault();    
-    if (this.state.value) {}
-    this.props.onSubmit(this.state.value);
-    this.setState({ value: '' });
+  const handleSubmit = event => {
+    event.preventDefault();
+    onSubmit(value);
+    setValue('');
     event.currentTarget.reset();
   };
 
-  render() {
-    return (
-      <Header>
-        <SearchForm onSubmit={this.onSubmit}>
-          <SearchFormButton type="submit">
-            <StyledBiSearchAlt />
-          </SearchFormButton>
-          <SearchFormInput
-            name="search"
-            type="text"
-            onChange={this.onChange}
-            placeholder="Search images and photos"
-          />
-        </SearchForm>
-      </Header>
-    );
-  }
-}
+  return (
+    <Header>
+      <SearchForm onSubmit={handleSubmit}>
+        <SearchFormButton type="submit">
+          <StyledBiSearchAlt />
+        </SearchFormButton>
+        <SearchFormInput
+          name="search"
+          type="text"
+          onChange={onChange}
+          placeholder="Search images and photos"
+        />
+      </SearchForm>
+    </Header>
+  );
+};
 
 Searchbar.propTypes = {
   onSubmit: PropTypes.func.isRequired,
