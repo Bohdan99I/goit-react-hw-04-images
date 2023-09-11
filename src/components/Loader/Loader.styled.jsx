@@ -11,6 +11,5 @@ export const LoaderWrapper = styled.div`
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 1000;
-
   margin: 0 auto;
 `;

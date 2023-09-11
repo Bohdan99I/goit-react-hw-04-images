@@ -19,6 +19,7 @@ export const Searchbar = ({ onSubmit }) => {
     event.preventDefault();
     onSubmit(value);
     setValue('');
+    
     event.currentTarget.reset();
   };
 

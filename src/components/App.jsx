@@ -23,6 +23,7 @@ export const App = () => {
         setIsLoading(true);
         const { totalHits, hits } = await getImages(value, page);
         const pageCount = totalHits / 12;
+        
         setTotalPages(pageCount);
         setTimeout(() => {
           if (page !== 1) {
