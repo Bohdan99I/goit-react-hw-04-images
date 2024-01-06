@@ -43,7 +43,6 @@ export const SearchFormButton = styled.button`
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   outline: none;
-
   &:hover {
     opacity: 1;
   }
@@ -63,7 +62,6 @@ export const SearchFormInput = styled.input`
   outline: none;
   padding-left: 10px;
   padding-right: 4px;
-
   &::placeholder {
     font: inherit;
     font-size: 18px;
